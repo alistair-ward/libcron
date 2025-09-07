@@ -1,7 +1,5 @@
-#include <date/date.h>
+#include <chrono>
 #include "libcron/CronData.h"
-
-using namespace date;
 
 namespace libcron
 {

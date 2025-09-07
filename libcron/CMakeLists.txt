@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.6)
 project(libcron)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_DEBUG_POSTFIX "d")
 
 # Deactivate Iterator-Debugging on Windows
 option(LIBCRON_DEACTIVATE_ITERATOR_DEBUGGING "Build with iterator-debugging (MSVC only)." OFF)
@@ -31,9 +32,9 @@ add_library(${PROJECT_NAME}
 		src/CronSchedule.cpp
 		src/Task.cpp)
 
-target_include_directories(${PROJECT_NAME}
-		PRIVATE ${CMAKE_CURRENT_LIST_DIR}/externals/date/include
-		PUBLIC include)
+target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
 
 if(NOT MSVC)
 	# Assume a modern compiler (gcc 9.3)
